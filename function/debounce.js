@@ -10,6 +10,7 @@ function debounce(func, wait) {
     if (wait > passed) {
       timerId = setTimeout(later, wait - passed)
     } else {
+      timerId = null
       result = func.apply(context, args)
     }
   }
