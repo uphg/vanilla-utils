@@ -5,6 +5,7 @@ describe('debounce', () => {
   it('是一个函数', () => {
     assert.isFunction(debounce)
   })
+
   it('防抖可用', (done) => {
     let counts = 0
     const fn = () => counts += 1
