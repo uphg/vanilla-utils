@@ -101,7 +101,6 @@ describe('throttle', () => {
       assert.strictEqual(results[3], 2, '函数调用2次')
       assert.strictEqual(results[4], 2, '函数被节流')
       assert.strictEqual(results[5], 3, '函数调用3次')
-      assert.deepEqual(results, [1, 1, 1, 2, 2, 3])
     }, 300)
   })
 })
