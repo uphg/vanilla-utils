@@ -1,10 +1,11 @@
-const chai = require('chai')
-const assert = chai.assert
-const sinon = require('sinon')
-const sinonChai = require('sinon-chai')
-const Promise2 = require('./promise')
+import * as chai from "chai";
+import * as sinon from "sinon";
+import * as sinonChai from "sinon-chai";
+import Promise2 from '../object/promise'
 
-chai.use(sinonChai)
+chai.use(sinonChai);
+
+const assert = chai.assert
 
 describe('Promise', () => {
   it('是一个类', () => {
@@ -14,14 +15,17 @@ describe('Promise', () => {
 
   it('new Promise() 必须接受一个函数', () => {
     assert.throw(() => {
+      // @ts-ignore
       new Promise2()
     })
 
     assert.throw(() => {
+      // @ts-ignore
       new Promise2(1)
     })
 
     assert.throw(() => {
+      // @ts-ignore
       new Promise2(false)
     })
   })
@@ -45,7 +49,7 @@ describe('Promise', () => {
     })
   })
 
-  it('.then(success) 中的 success 函数会在 resolve 被调用的时候执行', (done) => {
+  it('promise.then(success) 中的 success 函数会在 resolve 被调用的时候执行', (done) => {
     const success = sinon.fake()
     const promise = new Promise2((resolve, reject) => {
       assert.isFalse(success.called)
@@ -58,4 +62,26 @@ describe('Promise', () => {
 
     promise.then(success)
   })
+
+  it('promise.then(null, fail) 中的 fail 函数会在 reject 被调用的时候执行', (done) => {
+    const fn = sinon.fake()
+    const promise = new Promise2((resolve, reject) => {
+      assert.isFalse(fn.called)
+      reject()
+      setTimeout(() => {
+        assert.isTrue(fn.called)
+        done()
+      }, 0)
+    })
+
+    promise.then(null, fn)
+  })
+
+  // it("2.2.1 onFulfilled 和 onRejected 都是可选的参数：", () => {
+  //   const promise = new Promise(resolve => {
+  //     resolve();
+  //   });
+  //   promise.then(false, null);
+  //   assert(1 === 1);
+  // });
 })
