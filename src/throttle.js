@@ -1,4 +1,4 @@
-const now = require('../date/now')
+const now = require('./now')
 
 function throttle(func, wait) {
   let context, args, result, timerId
@@ -6,7 +6,6 @@ function throttle(func, wait) {
 
   const later = function () {
     clearTimeout(timerId)
-
     prev = now()
     timerId = null
     result = func.apply(context, args)

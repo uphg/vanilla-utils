@@ -1,4 +1,4 @@
-const now = require('../date/now')
+const now = require('./now')
 
 function debounce(func, wait) {
   let timerId, context, prev, result, args

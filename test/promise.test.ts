@@ -1,7 +1,7 @@
 import * as chai from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
-import Promise2 from '../object/promise'
+import Promise2 from '../src/promise'
 
 chai.use(sinonChai);
 
