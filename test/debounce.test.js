@@ -1,5 +1,5 @@
 const { assert } = require('chai')
-const debounce = require('./debounce')
+const debounce = require('../src/debounce')
 
 describe('debounce', () => {
   it('是一个函数', () => {

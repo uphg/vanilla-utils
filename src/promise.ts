@@ -1,6 +1,6 @@
 class Promise2 {
-  successd = null
-  fail = null
+  private state: 'pending' | 'fulfilled' | 'rejected' = 'pending'
+  private callbacks: [Function | null, Function | null][] = []
 
   constructor(func: Function) {
     if (typeof func !== 'function') {
@@ -9,29 +9,41 @@ class Promise2 {
     func(this.resolve.bind(this), this.reject.bind(this))
   }
 
-  resolve() {
+  resolve(result) {
+    if (this.state !== 'pending') return
+    this.state = 'fulfilled'
     setTimeout(() => {
-      const fn = this.successd
-      if (typeof fn === 'function') fn()
+      this.callbacks.forEach((handle) => {
+        const func = handle[0]
+        if (typeof func === 'function') {
+          func.call(void 0, result)
+        }
+      })
     }, 0)
   }
 
-  reject() {
+  reject(reason) {
+    if (this.state !== 'pending') return
+    this.state = 'rejected'
     setTimeout(() => {
-      console.log('this.fail')
-      console.log(this.fail)
-      const fn = this.fail
-      if (typeof fn === 'function') {
-        fn()
-      }
+      this.callbacks.forEach((handle) => {
+        const func = handle[1]
+        if (typeof func === 'function') {
+          func.call(void 0, reason)
+        }
+      })
     }, 0)
   }
 
   then(successd?, fail?) {
-    if (typeof successd === 'function') this.successd = successd
-    console.log('.then fail')
-    console.log(fail)
-    if (typeof fail === 'function') this.fail = fail
+    const handle: [Function, Function] = [null, null]
+    if (typeof successd === 'function') {
+      handle[0] = successd
+    }
+    if (typeof fail === 'function') {
+      handle[1] = fail
+    }
+    this.callbacks.push(handle)
   }
 }
 

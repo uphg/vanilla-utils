@@ -1,5 +1,5 @@
 const { assert } = require('chai')
-const bind = require('./bind')
+const bind = require('../src/bind')
 
 describe('bind', () => {
   before(() => {

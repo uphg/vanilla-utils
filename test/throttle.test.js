@@ -2,8 +2,8 @@ const chai = require('chai')
 const assert = chai.assert
 const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
-const throttle = require('./throttle')
-const delay = require('./delay')
+const throttle = require('../src/throttle')
+const delay = require('../src/delay')
 
 chai.use(sinonChai)
 
