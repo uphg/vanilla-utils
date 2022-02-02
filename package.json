@@ -4,7 +4,8 @@
   "description": "- [x] bind",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.{js,ts}"
+    "test": "mocha -r ts-node/register test/**/*.{js,ts}",
+    "test:promise": "mocha -r ts-node/register test/promise.test.ts"
   },
   "repository": {
     "type": "git",

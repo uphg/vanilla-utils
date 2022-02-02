@@ -204,4 +204,140 @@ describe('Promise', () => {
       done()
     }, 0)
   })
+
+  it('2.2.7 then 必须返回一个 promise 对象', () => {
+    const promise = new Promise2((resolve) => {
+      resolve()
+    })
+    const promise2 = promise.then(() => {})
+    assert(promise2 instanceof Promise2)
+  })
+
+  it('2.2.7.1 如果 then(success, fail) 中的 success 返回一个值x, 运行 this.resolve(promise2, x) ', () => {
+    const promise = new Promise2(resolve => {
+      resolve()
+    })
+    promise
+      .then(() => '成功', () => {})
+      .then((result) => {
+        assert.equal(result, '成功')
+      })
+  })
+
+  it('2.2.7.1.2 success 的返回值是一个 Promise 实例，且成功了', (done) => {
+    const callbacks = [sinon.fake(), sinon.fake()]
+    const promise = new Promise2(resolve => {
+      resolve()
+    })
+    const promise2 = promise.then(
+      () => new Promise2((resolve) => resolve())
+    )
+    promise2.then(callbacks[0], callbacks[1])
+    
+    assert.isFalse(callbacks[0].called)
+    assert.isFalse(callbacks[1].called)
+    setTimeout(() => {
+      assert(callbacks[0].called)
+      assert.isFalse(callbacks[1].called)
+      done()
+    })
+  })
+
+  it('2.2.7.1.2 success 的返回值是一个 Promise 实例，且失败了', (done) => {
+    const callbacks = [sinon.fake(), sinon.fake()]
+    const promise = new Promise2(resolve => {
+      resolve()
+    })
+    const promise2 = promise.then(
+      () => new Promise2((resolve, reject) => reject())
+    )
+    promise2.then(callbacks[0], callbacks[1])
+    assert.isFalse(callbacks[0].called)
+    assert.isFalse(callbacks[1].called)
+    setTimeout(() => {
+      assert.isFalse(callbacks[0].called)
+      assert(callbacks[1].called)
+      done()
+    })
+  })
+
+  it("2.2.7.1.2 fail 的返回值是一个 Promise 实例，且成功了", done => {
+    const callbacks = [sinon.fake(), sinon.fake()]
+    const promise = new Promise2((resolve, reject) => {
+      reject()
+    })
+    const promise2 = promise.then(
+      null,
+      () => new Promise2(resolve => resolve())
+    )
+    promise2.then(callbacks[0], callbacks[1])
+    assert.isFalse(callbacks[0].called)
+    assert.isFalse(callbacks[1].called)
+    setTimeout(() => {
+      assert(callbacks[0].called)
+      assert.isFalse(callbacks[1].called)
+      done()
+    })
+  })
+
+  it("2.2.7.1.2 fail 的返回值是一个 Promise 实例，且失败了", done => {
+    const callbacks = [sinon.fake(), sinon.fake()]
+    const promise = new Promise2((resolve, reject) => {
+      reject()
+    })
+    const promise2 = promise.then(
+      null,
+      () => new Promise2((resolve, reject) => reject())
+    )
+    promise2.then(callbacks[0], callbacks[1])
+    assert.isFalse(callbacks[0].called)
+    assert.isFalse(callbacks[1].called)
+    setTimeout(() => {
+      assert.isFalse(callbacks[0].called)
+      assert(callbacks[1].called)
+      done()
+    })
+  })
+
+  it('2.2.7.2 如果 success 抛出一个异常 error，promise2 必须被拒绝', done => {
+    const callbacks = [sinon.fake(), sinon.fake()]
+    const promise = new Promise2(resolve => {
+      resolve()
+    })
+    let error = new Error()
+    const promise2 = promise.then(() => {
+      throw error
+    })
+    promise2.then(callbacks[0], callbacks[1])
+    
+    assert.isFalse(callbacks[0].called)
+    assert.isFalse(callbacks[1].called)
+    setTimeout(() => {
+      assert.isFalse(callbacks[0].called)
+      assert(callbacks[1].called)
+      assert(callbacks[1].calledWith(error))
+      done()
+    })
+  })
+
+  it('2.2.7.2 如果 fail 抛出一个异常 error，promise2 必须被拒绝', done => {
+    const callbacks = [sinon.fake(), sinon.fake()]
+    const promise = new Promise2((resolve, reject) => {
+      reject()
+    })
+    let error = new Error()
+    const promise2 = promise.then(null, () => {
+      throw error
+    })
+    promise2.then(callbacks[0], callbacks[1])
+    
+    assert.isFalse(callbacks[0].called)
+    assert.isFalse(callbacks[1].called)
+    setTimeout(() => {
+      assert.isFalse(callbacks[0].called)
+      assert(callbacks[1].called)
+      assert(callbacks[1].calledWith(error))
+      done()
+    })
+  })
 })
