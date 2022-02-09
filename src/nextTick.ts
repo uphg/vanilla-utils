@@ -1,4 +1,4 @@
-function nextTick(fn) {
+function nextTick(fn: () => void) {
   if (typeof process !== 'undefined' && typeof process.nextTick === 'function') {
     return process.nextTick(fn)
   }
