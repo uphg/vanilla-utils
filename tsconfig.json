@@ -1,6 +1,22 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "types": ["node", "mocha"]
-  }
+    "baseUrl": "./",
+    "outDir": "dist",
+    "sourceMap": false,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "lib": ["ESNext", "DOM"],
+    "rootDir": ".",
+  },
+  "include": ["./src"]
 }
