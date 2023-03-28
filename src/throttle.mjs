@@ -1,4 +1,4 @@
-const now = require('./now')
+import now from './internal/now.mjs'
 
 function throttle(func, wait) {
   let context, args, result, timerId
@@ -30,4 +30,4 @@ function throttle(func, wait) {
   return throttled
 }
 
-module.exports = throttle
+export default throttle

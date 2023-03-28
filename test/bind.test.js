@@ -1,5 +1,5 @@
-const { assert } = require('chai')
-const bind = require('../src/bind')
+import { assert } from "chai"
+import bind from '../src/bind.mjs'
 
 describe('bind', () => {
   before(() => {

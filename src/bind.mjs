@@ -1,4 +1,3 @@
-// Function.prototype.bind 实现
 function bind(atThis, ...args) {
   const func = this
   const result = function (...fnArgs) {
@@ -9,4 +8,4 @@ function bind(atThis, ...args) {
   return result
 }
 
-module.exports = bind
+export default bind

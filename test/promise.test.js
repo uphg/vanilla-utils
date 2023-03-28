@@ -1,7 +1,7 @@
-import * as chai from "chai";
-import * as sinon from "sinon";
-import * as sinonChai from "sinon-chai";
-import Promise2 from '../src/promise'
+import chai from "chai";
+import sinon from "sinon";
+import sinonChai from "sinon-chai";
+import Promise2 from '../src/promise.mjs'
 
 chai.use(sinonChai);
 
@@ -15,17 +15,14 @@ describe('Promise', () => {
 
   it('new Promise() 必须接受一个函数', () => {
     assert.throw(() => {
-      // @ts-ignore
       new Promise2()
     })
 
     assert.throw(() => {
-      // @ts-ignore
       new Promise2(1)
     })
 
     assert.throw(() => {
-      // @ts-ignore
       new Promise2(false)
     })
 

@@ -1,4 +1,4 @@
-const now = require('./now')
+import now from './internal/now.mjs'
 
 function debounce(func, wait) {
   let timerId, context, prev, result, args
@@ -30,4 +30,4 @@ function debounce(func, wait) {
   return debounced
 }
 
-module.exports = debounce
+export default debounce

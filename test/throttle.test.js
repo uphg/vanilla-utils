@@ -1,9 +1,7 @@
-const chai = require('chai')
-const assert = chai.assert
-const sinon = require('sinon')
-const sinonChai = require('sinon-chai')
-const throttle = require('../src/throttle')
-const delay = require('../src/delay')
+import chai, { assert } from 'chai' 
+import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
+import throttle from '../src/throttle.mjs'
 
 chai.use(sinonChai)
 
@@ -90,11 +88,11 @@ describe('throttle', () => {
     const results = []
     const addResult = () => { results.push(throttledFn()) }
     addResult(); addResult()
-    delay(addResult, 50)
-    delay(addResult, 150)
-    delay(addResult, 170)
-    delay(addResult, 230)
-    delay(() => {
+    setTimeout(addResult, 50)
+    setTimeout(addResult, 150)
+    setTimeout(addResult, 170)
+    setTimeout(addResult, 230)
+    setTimeout(() => {
       assert.strictEqual(results[0], 1, '函数调用1次')
       assert.strictEqual(results[1], 1, '函数被节流')
       assert.strictEqual(results[2], 1, '函数被节流')

@@ -1,4 +1,4 @@
-function isObject(value: unknown) {
+function isObject(value) {
   return value !== null && typeof value === 'object'
 }
 

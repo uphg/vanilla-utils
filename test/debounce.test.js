@@ -1,5 +1,5 @@
-const { assert } = require('chai')
-const debounce = require('../src/debounce')
+import { assert } from "chai"
+import debounce from '../src/debounce..mjs'
 
 describe('debounce', () => {
   it('是一个函数', () => {

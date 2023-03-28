@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "types": ["node", "mocha"]
-  },
-  "include": ["./src"]
-}

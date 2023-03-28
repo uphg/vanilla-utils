@@ -1,7 +1,4 @@
-function nextTick(fn: () => void) {
-  if (typeof process !== 'undefined' && typeof process.nextTick === 'function') {
-    return process.nextTick(fn)
-  }
+function nextTick(fn) {
   let textNode = document.createTextNode('')
   const observer = new MutationObserver(() => {
     fn()
@@ -14,4 +11,4 @@ function nextTick(fn: () => void) {
   textNode.data = '0'
 }
 
-export default nextTick
+export default process ? process.nextTick : nextTick

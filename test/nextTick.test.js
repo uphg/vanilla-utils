@@ -1,9 +1,9 @@
-import * as chai from "chai";
-import * as sinon from "sinon";
-import * as sinonChai from "sinon-chai";
-import nextTick from '../src/nextTick'
+import chai from "chai";
+import sinon from "sinon";
+import sinonChai from "sinon-chai";
+import nextTick from '../src/nextTick.mjs'
 
-chai.use(sinonChai);
+chai.use(sinonChai)
 
 const assert = chai.assert
 
