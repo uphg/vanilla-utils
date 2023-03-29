@@ -1,33 +1,15 @@
-import now from './internal/now.mjs'
-
 function throttle(func, wait) {
-  let context, args, result, timerId
   let prev = 0
 
-  const later = function () {
-    clearTimeout(timerId)
-    prev = now()
-    timerId = null
-    result = func.apply(context, args)
-  }
+  return function (...args) {
+    const now = Date.now()
+    const remain = wait - (now - prev)
 
-  const throttled = function (..._args) {
-    const _now = now()
-    const remaining = wait - (_now - prev)
-    context = this
-    args = _args
-
-    if (remaining <= 0) {
-      prev = _now
-      result = func.apply(context, args)
-    } else if (!timerId) {
-      timerId = setTimeout(later, remaining)
+    if (remain <= 0) {
+      prev = now
+      func(...args)
     }
-
-    return result
   }
-
-  return throttled
 }
 
 export default throttle

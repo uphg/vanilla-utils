@@ -12,7 +12,7 @@ function debounce(func, wait) {
     }
   }
 
-  function debounced(..._args) {
+  return function(..._args) {
     prev = Date.now()
     args = _args
 
@@ -20,8 +20,6 @@ function debounce(func, wait) {
       timerId = setTimeout(later, wait)
     }
   }
-
-  return debounced
 }
 
 export default debounce
