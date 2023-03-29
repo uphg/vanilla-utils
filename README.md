@@ -7,6 +7,7 @@
 - [x] throttle
 - [x] nextTick
 - [x] cloneDeep
+- [x] uniq
 
 ## Class
 
