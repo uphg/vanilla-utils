@@ -1,6 +1,6 @@
-import nextTick from "./nextTick.mjs"
-import isObject from "./isObject.mjs"
 import isFunction from "./internal/isFunction.mjs"
+import isObject from "./internal/isObject.mjs"
+import nextTick from "./nextTick.mjs"
 
 class Promise2 {
   state = 'pending' // 'pending' | 'fulfilled' | 'rejected'

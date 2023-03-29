@@ -6,7 +6,9 @@
 - [x] debounce
 - [x] throttle
 - [x] nextTick
+- [x] cloneDeep
 
 ## Class
 
 - [x] Promise
+- [x] Emitter

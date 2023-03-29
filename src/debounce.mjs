@@ -2,7 +2,6 @@ function debounce(func, wait) {
   let timerId, prev, args
   
   function later() {
-    clearTimeout(timerId)
     const passed = Date.now() - prev
     if (wait > passed) {
       timerId = setTimeout(later, wait - passed)

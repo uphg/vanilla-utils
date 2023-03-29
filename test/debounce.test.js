@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import debounce from '../src/debounce..mjs'
+import debounce from '../src/debounce.mjs'
 
 describe('debounce', () => {
   it('是一个函数', () => {
@@ -10,14 +10,15 @@ describe('debounce', () => {
     let counts = 0
     const fn = () => counts += 1
 
-    const debounceFn = debounce(fn, 100)
+    const debounceFn = debounce(fn, 200)
     debounceFn(); debounceFn()
 
-    setTimeout(debounceFn, 200)
+    setTimeout(debounceFn, 150)
+    setTimeout(debounceFn, 250)
 
     setTimeout(() => {
       assert.strictEqual(counts, 1)
       done()
-    }, 300)
+    }, 500)
   })
 })
