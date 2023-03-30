@@ -4,11 +4,14 @@ function on(el, eventName, selector, callback) {
   el.addEventListener(eventName, (e) => {
     let current = e.target
     while (current.matches(selector)) {
-      if (el === current) break
+      if (el === current) {
+        el = null
+        break
+      }
       current = current.parentNode
     }
     
-    current?.call(current, e, current)
+    current && callback?.call(current, e, current)
   })
 }
 
