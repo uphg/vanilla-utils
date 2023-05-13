@@ -5,7 +5,7 @@ function on(el, eventName, selector, callback) {
     let current = e.target
     while (!current.matches(selector)) {
       if (el === current) {
-        el = null
+        current = null
         break
       }
       current = current.parentNode
