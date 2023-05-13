@@ -3,7 +3,7 @@ function on(el, eventName, selector, callback) {
 
   el.addEventListener(eventName, (e) => {
     let current = e.target
-    while (current.matches(selector)) {
+    while (!current.matches(selector)) {
       if (el === current) {
         el = null
         break
@@ -13,6 +13,7 @@ function on(el, eventName, selector, callback) {
     
     current && callback?.call(current, e, current)
   })
+  return el
 }
 
 export default on

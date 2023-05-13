@@ -24,7 +24,7 @@ function baseCloneDeep(value, cache) {
     }
     cache.set(value, result)
     for (const key in value) {
-      if (key && value.hasOwnProperty(key)) {
+      if (value.hasOwnProperty(key)) {
         const item = value[key]
         result[key] = baseCloneDeep(item, cache)
       }

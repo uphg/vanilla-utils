@@ -1,10 +1,10 @@
-function bind(atThis, ...args) {
-  const func = this
+function bind(atThis, ...prevArgs) {
+  const fn = this
   const result = function(..._args) {
     const _this = this instanceof result ? this : atThis
-    return func.apply(_this, args.concat(_args))
+    return fn.apply(_this, prevArgs.concat(_args))
   }
-  result.prototype = func.prototype
+  result.prototype = fn.prototype
   return result
 }
 

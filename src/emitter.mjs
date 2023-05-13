@@ -15,6 +15,10 @@ class Emitter {
   off(name, func) {
     const e = this.#events
     if (!e[name]) return
+    if (!fn) {
+      e[name] = []
+      return
+    }
     e[name] = e[name].filter(fn => fn !== func)
   }
 }
