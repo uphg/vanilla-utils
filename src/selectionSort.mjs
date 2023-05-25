@@ -15,7 +15,7 @@ function selectionSort(array) {
 }
 
 function findMinIndex(array) {
-  let index = -1
+  let index = 0
   let minIndex = 0
   const length = array.length
   while (++index < length) {
